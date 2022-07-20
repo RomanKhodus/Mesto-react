@@ -10,7 +10,7 @@ function App() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setisAddPlacePopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({ name: "", link: "" });
   }
 
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
@@ -18,8 +18,7 @@ function App() {
     setEditAvatarPopupOpen(true);
   }
 
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
-    React.useState(false);
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   function handleEditProfilePopupOpen() {
     setEditProfilePopupOpen(true);
   }
@@ -29,7 +28,7 @@ function App() {
     setisAddPlacePopupOpen(true);
   }
 
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({ name: "", link: "" });
   function handleCardClick(card) {
     setSelectedCard(card);
   }
@@ -49,6 +48,7 @@ function App() {
         name="avatar"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        buttonText="Сохранить"
       >
         <input
           type="url"
@@ -60,12 +60,6 @@ function App() {
           required
         />
         <span className="avatar-link-input-error popup__input-error"></span>
-        <button
-          type="submit"
-          className="popup__button-submit avatar-popup__button-submit"
-        >
-          Сохранить
-        </button>
       </PopupWithForm>
 
       <PopupWithForm
@@ -73,6 +67,7 @@ function App() {
         name="profile"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        buttonText="Сохранить"
       >
         <input
           id="name-input"
@@ -99,9 +94,6 @@ function App() {
           maxLength="200"
         />
         <span className="job-input-error popup__input-error"></span>
-        <button type="submit" className="popup__button-submit">
-          Сохранить
-        </button>
       </PopupWithForm>
 
       <PopupWithForm
@@ -109,6 +101,7 @@ function App() {
         title="Новое место"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        buttonText="Сохранить"
       >
         <input
           type="text"
@@ -132,18 +125,11 @@ function App() {
           required
         />
         <span className="link-input-error popup__input-error"></span>
-        <button type="submit" className="popup__button-submit">
-          Сохранить
-        </button>
       </PopupWithForm>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-      <PopupWithForm title="Вы уверены?" name="remove">
-        <button type="submit" className="popup__button-submit">
-          Да
-        </button>
-      </PopupWithForm>
+      <PopupWithForm title="Вы уверены?" name="remove" buttonText="Да"></PopupWithForm>
 
       <Footer />
     </div>
@@ -151,3 +137,9 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+

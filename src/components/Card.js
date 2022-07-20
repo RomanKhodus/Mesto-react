@@ -8,7 +8,7 @@ function Card({ card, onCardClick }) {
       <div className="elements__image-container">
         <img
           src={card.link}
-          alt="Фотография места"
+          alt={`Изображение ${card.name}`}
           className="elements__image"
           onClick={handleClick}
         />
