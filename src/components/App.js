@@ -1,5 +1,4 @@
 import React from "react";
-
 import Footer from "./Footer.js";
 import Header from "./Header.js";
 import Main from "./Main.js";
@@ -8,9 +7,10 @@ import ImagePopup from "./ImagePopup.js";
 
 function App() {
   function closeAllPopups() {
-     setEditAvatarPopupOpen(false);
-     setEditProfilePopupOpen(false);
-     setisAddPlacePopupOpen(false);
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setisAddPlacePopupOpen(false);
+    setSelectedCard(false);
   }
 
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
@@ -29,6 +29,11 @@ function App() {
     setisAddPlacePopupOpen(true);
   }
 
+  const [selectedCard, setSelectedCard] = React.useState(false);
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
+
   return (
     <div className="page">
       <Header />
@@ -36,6 +41,7 @@ function App() {
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfilePopupOpen}
         onAddPlace={handleisAddPlacePopupOpen}
+        onCardClick={handleCardClick}
       />
 
       <PopupWithForm
@@ -49,7 +55,7 @@ function App() {
           id="avatar-link-input"
           className="popup__input popup__input_type_link"
           name="link"
-          value=""
+          // value=""
           placeholder="Ссылка на картинку"
           required
         />
@@ -73,7 +79,7 @@ function App() {
           type="text"
           className="popup__input popup__input_type_name"
           name="name"
-          value=""
+          // value=""
           placeholder="Имя"
           required
           minLength="2"
@@ -85,7 +91,8 @@ function App() {
           type="text"
           className="popup__input popup__input_type_job"
           name="about"
-          value=""
+          // onChange={onChange}
+          // value=""
           placeholder="О себе"
           required
           minLength="2"
@@ -108,7 +115,7 @@ function App() {
           id="place-input"
           className="popup__input popup__input_type_place"
           name="name"
-          value=""
+          // value=""
           placeholder="Название"
           required
           minLength="2"
@@ -120,7 +127,7 @@ function App() {
           id="link-input"
           className="popup__input popup__input_type_link"
           name="link"
-          value=""
+          // value=""
           placeholder="Ссылка на картинку"
           required
         />
@@ -130,7 +137,7 @@ function App() {
         </button>
       </PopupWithForm>
 
-      <ImagePopup />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
       <PopupWithForm title="Вы уверены?" name="remove">
         <button type="submit" className="popup__button-submit">

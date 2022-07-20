@@ -1,3 +1,4 @@
+
 function PopupWithForm({ title, name, children, isOpen, onClose }) {
   return (
     <div
@@ -6,7 +7,7 @@ function PopupWithForm({ title, name, children, isOpen, onClose }) {
       }
     >
       <div className="popup__container">
-        <form className="popup__form" name={name} novalidate>
+        <form className="popup__form" name={name} noValidate>
           <fieldset className="popup__form-set">
             <button
               type="button"
@@ -15,9 +16,6 @@ function PopupWithForm({ title, name, children, isOpen, onClose }) {
             ></button>
             <h2 className="popup__header">{title}</h2>
             {children}
-            {/* <button type="submit" className="popup__button-submit">
-              Сохранить
-            </button> */}
           </fieldset>
         </form>
       </div>
