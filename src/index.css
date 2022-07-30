@@ -50,6 +50,7 @@
 @import url(./blocks/elements/__overlay/elements__overlay.css);
 @import url(./blocks/elements/__delete/elements__delete.css);
 @import url(./blocks/elements/__delete/_visible/elements__delete_visible.css);
+@import url(./blocks/elements/__delete/_hidden/elements_delete_hidden.css);
 @import url(./blocks/elements/__figcaption/elements__figcaption.css);
 @import url(./blocks/elements/__header/elements__header.css);
 @import url(./blocks/elements/__like-container/elements__like-container.css);
