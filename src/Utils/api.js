@@ -53,7 +53,6 @@ class Api {
         link: cardData.link,
       }),
     }).then((res) => {
-      console.log("Карточка зашла");
       return this._checkResponse(res);
     });
   }
