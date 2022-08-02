@@ -4,6 +4,8 @@ import Header from "./Header.js";
 import Main from "./Main.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
+import EditProfilePopup from "./EditProfilePopup.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
 import api from "../Utils/api.js";
 import { CurrentUserContext } from "../context/CurrentUserContext.js";
 
@@ -45,6 +47,23 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err.status}`));
   }, []);
 
+  function handleUpdateUser(user) {
+    api
+      .setUserInfo(user)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(`Ошибка: ${err.status}`));;
+  }
+
+  function handleUpdateAvatar({avatar}) {
+    api.setAvatar(avatar).then((res) => {
+      setCurrentUser(res);
+      closeAllPopups();
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -56,58 +75,17 @@ function App() {
           onCardClick={handleCardClick}
         />
 
-        <PopupWithForm
-          title="Обновить аватар"
-          name="avatar"
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-          buttonText="Сохранить"
-        >
-          <input
-            type="url"
-            id="avatar-link-input"
-            className="popup__input popup__input_type_link"
-            name="link"
-            // value=""
-            placeholder="Ссылка на картинку"
-            required
-          />
-          <span className="avatar-link-input-error popup__input-error"></span>
-        </PopupWithForm>
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
-        <PopupWithForm
-          title="Редактировать профиль"
-          name="profile"
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-          buttonText="Сохранить"
-        >
-          <input
-            id="name-input"
-            type="text"
-            className="popup__input popup__input_type_name"
-            name="name"
-            // value=""
-            placeholder="Имя"
-            required
-            minLength="2"
-            maxLength="40"
-          />
-          <span className="name-input-error popup__input-error"></span>
-          <input
-            id="job-input"
-            type="text"
-            className="popup__input popup__input_type_job"
-            name="about"
-            // onChange={onChange}
-            // value=""
-            placeholder="О себе"
-            required
-            minLength="2"
-            maxLength="200"
-          />
-          <span className="job-input-error popup__input-error"></span>
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
         <PopupWithForm
           name="add"
@@ -151,3 +129,12 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
