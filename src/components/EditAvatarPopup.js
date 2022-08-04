@@ -1,17 +1,18 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 
-
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const avatarRef = React.useRef();
+
+  React.useEffect(() => {
+    avatarRef.current.value = "";
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar({
       avatar: avatarRef.current.value,
     });
-    
-    avatarRef.current.value = '';
   }
 
   return (
@@ -29,7 +30,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         className="popup__input popup__input_type_link"
         name="link"
         ref={avatarRef}
-        // value=""
         placeholder="Ссылка на картинку"
         required
       />

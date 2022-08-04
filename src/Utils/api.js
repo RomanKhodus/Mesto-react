@@ -10,16 +10,14 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка в deleteCard: ${res.status}`);
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
       method: "GET",
       headers: this.headers,
-    }).then((res) => {
-      return this._checkResponse(res);
-    });
+    }).then(res => this._checkResponse(res));
   }
 
   getUserInfo() {
@@ -66,26 +64,8 @@ class Api {
     });
   }
 
-  // addLikes(cardId) {
-  //   return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
-  //     method: "PUT",
-  //     headers: this.headers,
-  //   }).then((res) => {
-  //     return this._checkResponse(res);
-  //   });
-  // }
-
-  // removeLike(cardId) {
-  //   return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
-  //     method: "DELETE",
-  //     headers: this.headers,
-  //   }).then((res) => {
-  //     return this._checkResponse(res);
-  //   });
-  // }
-
   changeLikeCardStatus(cardId, isLiked) {
-    if(isLiked){
+    if (isLiked) {
       return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
         method: "DELETE",
         headers: this.headers,
