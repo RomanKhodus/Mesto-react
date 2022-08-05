@@ -92,7 +92,7 @@ function App() {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => console.log(`Ошибка: ${err.status}`));;
+      .catch((err) => console.log(`Ошибка: ${err.status}`));
   }
 
   function handleAddPlaceSubmit(cardData) {
@@ -102,7 +102,7 @@ function App() {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => console.log(`Ошибка: ${err.status}`));;
+      .catch((err) => console.log(`Ошибка: ${err.status}`));
   }
 
   return (

@@ -8,8 +8,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   React.useEffect(() => {
     setName("");
     setLink("");
-    // console.log("ok");
-  }, []);
+  }, [isOpen]);
 
   function handleChangeName(e) {
     setName(e.target.value);
