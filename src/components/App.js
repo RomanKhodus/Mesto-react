@@ -11,6 +11,7 @@ import api from "../Utils/api.js";
 import { CurrentUserContext } from "../context/CurrentUserContext.js";
 
 function App() {
+  const [buttonText, setButtonText] = React.useState("Сохранить");
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -76,33 +77,43 @@ function App() {
   }
 
   function handleUpdateUser(user) {
+    setButtonText("Думаю...");
     api
       .setUserInfo(user)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => console.log(`Ошибка: ${err.status}`));
+      .catch((err) => console.log(`Ошибка: ${err.status}`))
+      .finally(() => {
+        setButtonText("Сохранить");
+      });
   }
 
-  function handleUpdateAvatar({ avatar }) {
+  function handleUpdateAvatar({ avatar, }) {
+    setButtonText('Думаю...')
     api
       .setAvatar(avatar)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => console.log(`Ошибка: ${err.status}`));
+      .catch((err) => console.log(`Ошибка: ${err.status}`))
+      .finally(()=>{setButtonText("Сохранить")});
   }
 
   function handleAddPlaceSubmit(cardData) {
+    setButtonText("Думаю...");
     api
       .setNewCard(cardData)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => console.log(`Ошибка: ${err.status}`));
+      .catch((err) => console.log(`Ошибка: ${err.status}`))
+      .finally(() => {
+        setButtonText("Сохранить");
+      });
   }
 
   return (
@@ -123,21 +134,28 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          buttonText={buttonText}
         />
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          buttonText={buttonText}
         />
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          buttonText={buttonText}
         />
 
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <ImagePopup 
+          card={selectedCard} 
+          onClose={closeAllPopups} 
+          buttonText={buttonText} 
+        />
 
         <PopupWithForm title="Вы уверены?" name="remove" buttonText="Да"></PopupWithForm>
 
@@ -148,6 +166,16 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
 
 
 
